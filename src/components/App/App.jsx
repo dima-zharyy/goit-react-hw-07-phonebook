@@ -7,6 +7,7 @@ import {
   ContactsWrapper,
 } from './App.styled';
 
+
 export const App = () => {
   return (
     <AppContainer>

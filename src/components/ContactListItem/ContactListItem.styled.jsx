@@ -18,12 +18,12 @@ export const ContactTextWrapper = styled.div`
 `;
 
 export const ContactName = styled.span`
-  min-width: 140px;
+  min-width: 170px;
   font-weight: 600;
 `;
 
 export const Button = styled.button`
-  width: 60px;
+  width: 80px;
   height: 30px;
   padding: 0;
 

@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { FilterLabel, FilterInput, FilterWrapper } from './Filter.styled';
 import { useDispatch } from 'react-redux/es/exports';
-import { changeFilter } from 'redux/contacts/contactsSlice';
+import { changeFilter } from 'redux/filter/filterSlice.js';
 
 export const Filter = () => {
   const filterId = useId();

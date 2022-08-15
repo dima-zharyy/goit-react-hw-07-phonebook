@@ -9,16 +9,18 @@ import {
 
 import { isContactInList } from 'helpers/isContactInList';
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem, getItems } from 'redux/contacts/contactsSlice';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from 'redux/contacts/contactsApi';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const inputNameId = useId();
   const inputNumberId = useId();
-  const dispatch = useDispatch();
-  const contacts = useSelector(getItems);
+  const { data: contacts } = useGetContactsQuery();
+  const [addContact, { isLoading }] = useAddContactMutation();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,7 +35,7 @@ export const ContactForm = () => {
     const id = nanoid(5);
     const newContact = { id, name, number };
 
-    dispatch(addItem(newContact));
+    addContact(newContact);
 
     setName('');
     setNumber('');
@@ -86,7 +88,9 @@ export const ContactForm = () => {
           autoComplete="off"
         />
       </InnerFormContainer>
-      <Button type="submit">Add contact</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Adding...' : 'Add contact'}
+      </Button>
     </Form>
   );
 };
