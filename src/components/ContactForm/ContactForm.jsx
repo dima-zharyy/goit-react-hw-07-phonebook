@@ -16,9 +16,9 @@ import {
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const inputNameId = useId();
-  const inputNumberId = useId();
+  const inputPhoneId = useId();
   const { data: contacts } = useGetContactsQuery();
   const [addContact, { isLoading }] = useAddContactMutation();
 
@@ -28,17 +28,17 @@ export const ContactForm = () => {
     if (isContactInList(contacts, name)) {
       alert(`${name} is already in contacts.`);
       setName('');
-      setNumber('');
+      setPhone('');
       return;
     }
 
     const id = nanoid(5);
-    const newContact = { id, name, number };
+    const newContact = { id, name, phone };
 
     addContact(newContact);
 
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   const handleInputChange = event => {
@@ -49,8 +49,8 @@ export const ContactForm = () => {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -75,16 +75,16 @@ export const ContactForm = () => {
         />
       </InnerFormContainer>
       <InnerFormContainer>
-        <FormLabel htmlFor={inputNumberId}>Number</FormLabel>
+        <FormLabel htmlFor={inputPhoneId}>Phone</FormLabel>
         <FormInput
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          id={inputNumberId}
+          id={inputPhoneId}
           onChange={handleInputChange}
-          value={number}
+          value={phone}
           autoComplete="off"
         />
       </InnerFormContainer>
