@@ -11,16 +11,16 @@ import PropTypes from 'prop-types';
 export const ContactListItem = ({ name, phone, id }) => {
   const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
-  const handleDelete = () => {
-    deleteContact(id);
-  };
-
   return (
     <ContactItem>
       <ContactTextWrapper>
         <ContactName>{name}:</ContactName> <span>{phone}</span>
       </ContactTextWrapper>
-      <Button type="button" disabled={isLoading} onClick={handleDelete}>
+      <Button
+        type="button"
+        disabled={isLoading}
+        onClick={() => deleteContact(id)}
+      >
         {isLoading ? 'Deleting...' : 'Delete'}
       </Button>
     </ContactItem>

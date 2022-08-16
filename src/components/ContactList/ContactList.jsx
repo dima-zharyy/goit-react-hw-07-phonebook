@@ -17,7 +17,7 @@ export const ContactList = () => {
     return <Loader />;
   }
 
-  return !isLoading && contacts.length > 0 ? (
+  return contacts.length > 0 ? (
     <ul>
       {filteredContacts.map(({ id, name, phone }) => {
         return <ContactListItem key={id} name={name} phone={phone} id={id} />;
